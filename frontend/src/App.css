@@ -94,3 +94,6 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--t
 
 /* ── Footer ── */
 .footer{display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--muted);background:var(--surface)}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.form textarea{resize:vertical}

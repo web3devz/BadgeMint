@@ -12,7 +12,7 @@ An NFT-based achievement platform built on **OneChain**. Mint digital badges rep
 | Deploy Transaction | `FG3jWEVjVPvTNk47NzxHhc273JjErjZ4Rgag8E87dDTj` |
 
 - [View Package](https://onescan.cc/testnet/objectDetails?address=0x7bac0e92cd0b7aaa7407f70702fa9e185aa95a73b1b7057f5f20d9dfe7e3b8f1)
-- [View Deploy Tx](https://onescan.cc/testnet/transactionDetail?digest=FG3jWEVjVPvTNk47NzxHhc273JjErjZ4Rgag8E87dDTj)
+- [View Deploy Tx](https://onescan.cc/testnet/transactionBlocksDetail?digest=FG3jWEVjVPvTNk47NzxHhc273JjErjZ4Rgag8E87dDTj)
 
 ---
 

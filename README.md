@@ -1,4 +1,4 @@
-# BadgeMint
+# BadgeMint 🏅
 
 An NFT-based achievement platform built on **OneChain**. Mint digital badges representing accomplishments — permanent, transferable, and publicly verifiable. Badges can represent skills, milestones, or event participation.
 
@@ -13,6 +13,14 @@ An NFT-based achievement platform built on **OneChain**. Mint digital badges rep
 
 - [View Package](https://onescan.cc/testnet/packageDetail?packageId=0x7bac0e92cd0b7aaa7407f70702fa9e185aa95a73b1b7057f5f20d9dfe7e3b8f1)
 - [View Deploy Tx](https://onescan.cc/testnet/transactionBlocksDetail?digest=FG3jWEVjVPvTNk47NzxHhc273JjErjZ4Rgag8E87dDTj)
+
+---
+
+## Features
+
+- Mint NFT badges to any recipient wallet
+- View all badges owned by connected wallet
+- **AI Auto-Description** — type a badge name and GPT-4o-mini automatically generates a concise, inspiring description (debounced, editable)
 
 ---
 
@@ -39,6 +47,7 @@ cd frontend && npm install && npm run dev
 Set in `frontend/.env`:
 ```env
 VITE_PACKAGE_ID=<package_id>
+VITE_OPENAI_KEY=<openai_api_key>
 ```
 
 ## License

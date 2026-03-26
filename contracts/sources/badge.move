@@ -1,42 +1,63 @@
 module badge_mint::badge {
-    use sui::event;
-    use sui::object::{Self, UID};
-    use sui::transfer;
-    use sui::tx_context::{Self, TxContext};
+    use std::string::{Self, String};
+    use one::event;
 
+    /// NFT badge owned by recipient
     public struct Badge has key, store {
-        id: UID,
-        name: vector<u8>,
-        description: vector<u8>,
-        metadata_uri: vector<u8>,
+        id: object::UID,
+        name: String,
+        description: String,
+        image_url: String,
         issuer: address,
         recipient: address,
+        epoch: u64,
     }
 
     public struct BadgeMinted has copy, drop {
-        badge_id: UID,
+        name: String,
         issuer: address,
         recipient: address,
+        epoch: u64,
     }
 
-    /// Mints a badge NFT to the recipient.
-    public entry fun mint(
-        name: vector<u8>,
-        description: vector<u8>,
-        metadata_uri: vector<u8>,
+    const E_EMPTY_NAME: u64 = 0;
+
+    /// Mint a badge NFT to any recipient
+    public fun mint(
+        raw_name: vector<u8>,
+        raw_description: vector<u8>,
+        raw_image_url: vector<u8>,
         recipient: address,
         ctx: &mut TxContext,
     ) {
-        let issuer = tx_context::sender(ctx);
+        let name = string::utf8(raw_name);
+        assert!(string::length(&name) > 0, E_EMPTY_NAME);
+
+        let issuer = ctx.sender();
+        let epoch = ctx.epoch();
+
+        event::emit(BadgeMinted { name, issuer, recipient, epoch });
+
         let badge = Badge {
             id: object::new(ctx),
             name,
-            description,
-            metadata_uri,
+            description: string::utf8(raw_description),
+            image_url: string::utf8(raw_image_url),
             issuer,
             recipient,
+            epoch,
         };
-        event::emit(BadgeMinted { badge_id: badge.id, issuer, recipient });
         transfer::transfer(badge, recipient);
     }
+
+    /// Burn a badge (owner only)
+    public fun burn(badge: Badge, ctx: &TxContext) {
+        assert!(badge.recipient == ctx.sender(), 0);
+        let Badge { id, name: _, description: _, image_url: _, issuer: _, recipient: _, epoch: _ } = badge;
+        object::delete(id);
+    }
+
+    public fun name(b: &Badge): &String { &b.name }
+    public fun issuer(b: &Badge): address { b.issuer }
+    public fun recipient(b: &Badge): address { b.recipient }
 }

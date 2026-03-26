@@ -1,5 +1,5 @@
 import { useCurrentAccount, useSuiClientQuery } from '@mysten/dapp-kit'
-import { PACKAGE_ID, objectUrl } from '../config/network'
+import { PACKAGE_ID } from '../config/network'
 
 interface BadgeFields {
   name: string
@@ -45,11 +45,11 @@ export default function MyBadges() {
           const objId = obj.data?.objectId ?? ''
 
           return (
-            <a key={objId} href={objectUrl(objId)} target="_blank" rel="noreferrer" className="badge-card" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div key={objId} className="badge-card">
               <div className="badge-icon">🏆</div>
               <div className="badge-name">{f.name}</div>
               <div className="badge-desc">Issued by {f.issuer.slice(0, 8)}...</div>
-            </a>
+            </div>
           )
         })}
       </div>
